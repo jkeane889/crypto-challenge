@@ -1,29 +1,30 @@
-const express = require('express');
-const path = require('path');
-const template = require('./views/template');
+// isomorphic javascript with 'import'
+import express from 'express';
+import { matchRoutes } from 'react-router-config';
+import renderer from './renderer';
+import createStore from './createStore';
+
 const app = express();
+const port = 3000;
 
-// serving static files
-// app.use('/', express.static(path.resolve(__dirname, 'assets')));
+app.get('*', (req, res) => {
+    const result = renderer();
+    res.send(result);
+    // const store = createStore({});
+    // const promises = matchRoutes(routes, req.path).map(
+    //     ({ route, match}) => (route.loadData ? route.loadData(store, match, req.get('cookie') || {}, req.query) : null)
+    // );
 
-app.listen(process.env.PORT || 5000);
-
-const data = require('./assets/data.json');
-
-let initialState = {
-    isFetching: false,
-    apps: data
-};
-
-// SSR function import
-const ssr = require('./views/server');
-
-app.get('/', (req, res) => {
-    const { preloadedState, content } = ssr(initialState);
-    const response = template("Server Rendered Page", preloadedState, content)
-    res.setHeader('Cache-control', 'assets, max-age=604800')
-    res.send(response);
+    // Promise.all(promises).then(() => {
+    //     const result = renderer(req);
+    //     const context = result.context;
+    //     if (context && context.status !== undefined) {
+    //         res.status(context.status);
+    //     }
+    //     res.send(result.jsx);
+    // })
 });
 
-
-
+app.listen(port, () => {
+    console.log(`Server is listening on ${port}`);
+});

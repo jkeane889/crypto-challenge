@@ -1,42 +1,27 @@
-export const REQUEST_APPS = 'REQUEST_APPS'
-export const RECEIVE_APPS = 'RECEIVE_APPS'
+// actions.js
 
+export const FETCH_PRICES_PENDING = 'FETCH_PRICES_PENDING';
+export const FETCH_PRICES_SUCCESS = 'FETCH_PRICES_SUCCESS';
+export const FETCH_PRICES_ERROR = 'FETCH_PRICES_ERROR';
 
-function requestApps() {
+function fetchPricesPending() {
   return {
-    type: REQUEST_APPS
+    type: FETCH_PRICES_PENDING
   }
 }
 
-function receiveApps(json) {
+function fetchPricesSuccess(prices) {
   return {
-    type: RECEIVE_APPS,
-    apps: json
+    type: FETCH_PRICES_SUCCESS,
+    prices: prices
   }
 }
 
-function fetchApps() {
-  return dispatch => {
-    dispatch(requestApps())
-    return fetch(`assets/data.json`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveApps(json)))
+function fetchPricesError(error) {
+  return {
+    type: FETCH_PRICES_ERROR,
+    error: error
   }
 }
 
-function shouldFetchApps(state) {
-  const apps = state.apps
-  if (apps.length==0) {
-    return true
-  } else if (state.isFetching) {
-    return false
-  }
-}
 
-export function fetchAppsIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchApps(getState())) {
-      return dispatch(fetchApps())
-    }
-  }
-}
