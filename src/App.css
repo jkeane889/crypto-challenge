@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+.app-container {
+  display: grid;
+  grid-template-columns: repeat(15, minmax(5%, auto));
+  grid-template-rows: repeat(4, minmax(5%, auto));
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.get-prices-element {
+  grid-row: 1;
+  grid-column: 2;
+  margin-top: 20%;
+  margin-bottom: 20%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.get-prices-button {
+  background-color: #4CAF50;
+  border: none;
   color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.select-menu {
+  grid-row: 2;
+  grid-column: 2;
+  margin-bottom: 5%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.filter-element {
+  margin: 1%;
+}
+
+.filter-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.coins-table {
+  grid-row: 3;
+  grid-column: 2 / span 13;
+}
+
+.pagination {
+  grid-row: 4;
+  grid-column: 12 / span 2;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.5%;
+}
+
+th {
+  background-color: gold
 }
